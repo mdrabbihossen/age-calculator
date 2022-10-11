@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CalculatorHome extends StatelessWidget {
+class CalculatorHome extends StatefulWidget {
   const CalculatorHome({Key? key}) : super(key: key);
+
+  @override
+  State<CalculatorHome> createState() => _CalculatorHomeState();
+}
+
+class _CalculatorHomeState extends State<CalculatorHome> {
+  @override
+  void initState() {
+    // implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    //  implement dispose
+    super.dispose();
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
