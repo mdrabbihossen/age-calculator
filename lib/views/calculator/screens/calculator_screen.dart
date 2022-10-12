@@ -9,19 +9,22 @@ class CalculatorHome extends StatefulWidget {
 }
 
 class _CalculatorHomeState extends State<CalculatorHome> {
-  @override
-  void initState() {
-    // implement initState
-    super.initState();
-  }
+  DateTime date = DateTime.now();
+  DateTime initialDate = DateTime.now();
+  DateTime firstDate = DateTime(1900);
+  DateTime lastDate = DateTime.now();
 
-  @override
-  void dispose() {
-    //  implement dispose
-    super.dispose();
-  }
+  String ageInYears = '';
+  String ageInMonths = '';
+  String ageInDays = '';
+  String ageInHours = '';
+  String ageInMinutes = '';
+  String ageInSeconds = '';
 
-  
+  void calculateAge() {
+    // calculate age in years
+    ageInYears = (initialDate.year - date.year).toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +35,14 @@ class _CalculatorHomeState extends State<CalculatorHome> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        title: Text('Calculate Your Age',
-            style: GoogleFonts.indieFlower(
-              color: Colors.black,
-              fontSize: 21,
-              fontWeight: FontWeight.w700,
-            )),
+        title: Text(
+          'Calculate Your Age',
+          style: GoogleFonts.indieFlower(
+            color: Colors.black,
+            fontSize: 21,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -84,49 +89,31 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            print('Month Click');
-                          },
-                          child: Text(
-                            'MM/',
-                            style: GoogleFonts.montserrat(
-                              color: Color(0xffcbd4f5),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                    InkWell(
+                      onTap: () async {
+                        DateTime? newDate = await showDatePicker(
+                          context: context,
+                          initialDate: initialDate,
+                          firstDate: firstDate,
+                          lastDate: lastDate,
+                        );
+                        if (newDate == null) return;
+                        setState(() {
+                          date = newDate;
+                          calculateAge();
+                        });
+                      },
+                      child: Text(
+                        // ignore: unnecessary_null_comparison
+                        date != null
+                            ? '${date.day}/${date.month}/${date.year}?'
+                            : "Tap to select date",
+                        style: GoogleFonts.montserrat(
+                          color: Color(0xffcbd4f5),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
-                        InkWell(
-                          onTap: () {
-                            print('Date Click');
-                          },
-                          child: Text(
-                            'DD/',
-                            style: GoogleFonts.montserrat(
-                              color: Color(0xffcbd4f5),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print('Year Click');
-                          },
-                          child: Text(
-                            'YYYY?',
-                            style: GoogleFonts.montserrat(
-                              color: Color(0xffcbd4f5),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -136,7 +123,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Your Age in Years : 0',
+                    'Your Age in Years : ${ageInYears}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
@@ -145,7 +132,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Your Age in Months : 0',
+                    'Your Age in Months : ${ageInMonths}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
@@ -154,7 +141,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Your Age in Days : 0',
+                    'Your Age in Days : ${ageInDays}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
@@ -163,7 +150,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Your Age in Hours : 0',
+                    'Your Age in Hours : ${ageInHours}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
@@ -172,7 +159,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Your Age in Minutes  : 0',
+                    'Your Age in Minutes  : ${ageInMinutes}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
@@ -181,7 +168,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Your Age in Seconds : 0',
+                    'Your Age in Seconds : ${ageInSeconds}',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
