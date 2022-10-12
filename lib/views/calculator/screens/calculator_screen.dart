@@ -14,7 +14,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
   DateTime firstDate = DateTime(1900);
   DateTime lastDate = DateTime.now();
 
-  String ageInYears = '';
+  String? ageInYears;
   String ageInMonths = '';
   String ageInDays = '';
   String ageInHours = '';
@@ -105,9 +105,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                       },
                       child: Text(
                         // ignore: unnecessary_null_comparison
-                        date != null
-                            ? '${date.day}/${date.month}/${date.year}?'
-                            : "Tap to select date",
+                        date != null ? '${date.year}?' : "Tap to select date",
                         style: GoogleFonts.montserrat(
                           color: Color(0xffcbd4f5),
                           fontSize: 16,
@@ -123,58 +121,68 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Your Age in Years : ${ageInYears}',
+                    ageInYears == null ? "" : 'You are $ageInYears Years Old',
                     style: GoogleFonts.raleway(
                       color: Color(0xff54585c),
                       fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Your Age in Months : ${ageInMonths}',
-                    style: GoogleFonts.raleway(
-                      color: Color(0xff54585c),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  // SizedBox(height: 5),
+                  // Text(
+                  //   'Your Age in Months : ${ageInMonths}',
+                  //   style: GoogleFonts.raleway(
+                  //     color: Color(0xff54585c),
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5),
+                  // Text(
+                  //   'Your Age in Days : ${ageInDays}',
+                  //   style: GoogleFonts.raleway(
+                  //     color: Color(0xff54585c),
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5),
+                  // Text(
+                  //   'Your Age in Hours : ${ageInHours}',
+                  //   style: GoogleFonts.raleway(
+                  //     color: Color(0xff54585c),
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5),
+                  // Text(
+                  //   'Your Age in Minutes  : ${ageInMinutes}',
+                  //   style: GoogleFonts.raleway(
+                  //     color: Color(0xff54585c),
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5),
+                  // Text(
+                  //   'Your Age in Seconds : ${ageInSeconds}',
+                  //   style: GoogleFonts.raleway(
+                  //     color: Color(0xff54585c),
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // if age greater than 18 then show this
+                  if (ageInYears != null && int.parse(ageInYears!) >= 18)
+                    Text(
+                      'You are eligible to vote',
+                      style: GoogleFonts.raleway(
+                        color: Color(0xff54585c),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Your Age in Days : ${ageInDays}',
-                    style: GoogleFonts.raleway(
-                      color: Color(0xff54585c),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Your Age in Hours : ${ageInHours}',
-                    style: GoogleFonts.raleway(
-                      color: Color(0xff54585c),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Your Age in Minutes  : ${ageInMinutes}',
-                    style: GoogleFonts.raleway(
-                      color: Color(0xff54585c),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Your Age in Seconds : ${ageInSeconds}',
-                    style: GoogleFonts.raleway(
-                      color: Color(0xff54585c),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                 ],
               ),
               Spacer(),
